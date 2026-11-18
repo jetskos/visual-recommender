@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Visual Recommender</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10 font-sans text-gray-800">
+    <div class="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-center text-indigo-600">Visual Similarity Search</h1>
+        <form hx-post="/search" hx-encoding="multipart/form-data" hx-target="#results"
+              hx-indicator="#spinner"
+              class="mb-8 text-center bg-gray-50 p-6 rounded-lg border border-dashed border-gray-300">
+            <label class="block mb-2 font-semibold text-gray-700">
+                Upload a product photo to find similar items:
+            </label>
+            <input type="file" name="file" accept="image/*" required
+                   class="mb-4 mx-auto block w-full max-w-sm text-sm text-gray-500
+                          file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
+                          file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700
+                          hover:file:bg-indigo-100">
+            <label for="gender-filter" class="block mt-4 mb-2 font-semibold text-gray-700">
+                Filter by Department:
+            </label>
+            <select id="gender-filter" name="gender_filter"
+                    class="mb-6 mx-auto block w-full max-w-sm text-sm text-gray-700
+                           py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm
+                           focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="All">All Departments (No Filter)</option>
+                <option value="Women">Women</option>
+                <option value="Men">Men</option>
+                <option value="Unisex">Unisex</option>
+                <option value="Boys">Boys</option>
+                <option value="Girls">Girls</option>
+            </select>
+            <button type="submit"
+                    class="bg-indigo-600 text-white px-8 py-2 rounded-full font-bold hover:bg-indigo-700 transition">
+                Search
+            </button>
+        </form>
+
+        <div id="spinner" class="htmx-indicator text-center text-indigo-500 font-bold mb-4">
+            Analyzing Visual Features...
+        </div>
+        <div id="results">
+            <p class="text-center text-gray-400 italic">Similar products will appear here.</p>
+        </div>
+    </div>
+</body>
+</html>
